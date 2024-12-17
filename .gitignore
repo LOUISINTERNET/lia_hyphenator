@@ -1,0 +1,10 @@
+/.Build
+/.project
+/.settings
+/.buildpath
+/.vscode
+/.php_cs.cache
+/.phpunit.cache
+/var/
+/vendor/
+/composer.lock

@@ -1,0 +1,10 @@
+# cat=Configuration//a; type=int+; label=leftMin:How many characters have to be left unhyphenated to the left of the word. This has to be an integer value.
+leftMin = 2
+# cat=Configuration//b; type=int+; label=rightMin:How many characters have to be left unhyphenated to the right of the word. This has to be an integer value
+rightMin = 2
+# cat=Configuration//c; type=int+; label=wordMin:Words under the given length will not be hyphenated altogether. It makes sense to set option to a higher value than the sum of rightMin and leftMin.
+wordMin = 6
+# cat=Configuration//d; type=options[0,1,2,3,4,5,6,7,8,9]; label=quality: How good shal the hyphenation be. The higher the number the better. THis can be any integer from 0 (no Hyphenation at all) through 9 (berst hyphernation). This defaults to 9. .. warning:: Change this only if you know what you do!
+quality = 9
+# cat=Configuration//e; type=string; label=defaultLocale: This parameter defines what dictionary to use by default for hyphenation.
+defaultLocale = de-DE
