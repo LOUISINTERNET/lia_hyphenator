@@ -16,9 +16,10 @@
 		"org_heigl/hyphenator": "^3.1.0"
 	},
 	"require-dev": {
-		"typo3/testing-framework": "^8.0.9",
 		"phpunit/phpunit": "^10.5",
-		"typo3/coding-standards": "^0.8.0"
+		"typo3/testing-framework": "^8.0.9",
+		"typo3/coding-standards": "^0.8.0",
+		"t3docs/fluid-documentation-generator": "^4.4"
 	},
 	"autoload": {
 		"psr-4": {
@@ -31,7 +32,7 @@
 		}
 	},
 	"replace": {
-		"typo3-ter/lia-hyphenator": "self.version"
+		"lia/lia-hyphenator": "self.version"
 	},
 	"scripts": {
 		"post-autoload-dump": [
@@ -40,15 +41,25 @@
 		"test:create-directories": "mkdir -p .Build/public/typo3temp/var/tests",
 		"test:functional": [
 			"@tests:create-directories",
-			"typo3DatabaseUsername=li-dev typo3DatabasePassword=meier typo3DatabaseName=typo3_test  find 'Tests/Functional' -wholename '*Test.php' -exec bash -c 'echo; echo \\\"Running functional test suite {} \\\"; vendor/bin/phpunit -c Build/phpunit/FunctionalTests.xml {}' \\;"
+			"typo3DatabaseUsername=li-dev typo3DatabasePassword=meier typo3DatabaseName=typo3_test  find 'Tests/Functional' -wholename '*Test.php' -exec bash -c 'echo; echo \\\"Running functional test suite {} \\\"; .Build/bin/phpunit -c Build/phpunit/FunctionalTests.xml {}' \\;"
 		],
 		"test:unit": [
-			"[ -e vendor/bin/phpunit ] || composer update --ansi",
-			"export TYPO3_PATH_WEB=$PWD/.Build/Web && vendor/bin/phpunit -c Build/phpunit/UnitTests.xml --colors=always"
+			"[ -e .Build/bin/phpunit ] || composer update --ansi",
+			"export TYPO3_PATH_WEB=$PWD/.Build/Web && .Build/bin/phpunit -c Build/phpunit/UnitTests.xml --colors=always"
 		],
 		"test": [
 			"@test:unit",
 			"@test:functional"
+		],
+		"viewhelper-docs": [
+			"FLUID_DOCUMENTATION_OUTPUT_DIR=Documentation/ViewHelper .Build/bin/fluidDocumentation generate viewhelpers_config.json"
+		],
+		"build-docs": [
+			"docker run --rm --pull always -v $(pwd):/project -it ghcr.io/typo3-documentation/render-guides:latest --config=Documentation"
+		],
+		"build-full-doc": [
+			"@viewhelper-docs",
+			"@build-docs"
 		]
 	},
 	"extra": {
@@ -60,6 +71,8 @@
 		}
 	},
 	"config": {
+		"vendor-dir": ".Build/vendor",
+		"bin-dir": ".Build/bin",
 		"allow-plugins": {
 			"typo3/class-alias-loader": true,
 			"typo3/cms-composer-installers": true
