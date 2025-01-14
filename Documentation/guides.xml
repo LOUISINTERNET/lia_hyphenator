@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- See  https://docs.typo3.org/permalink/h2document:guides-xml for documentation on this file-->
+<guides
+    xmlns="https://www.phpdoc.org/guides"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.phpdoc.org/guides vendor/phpdocumentor/guides-cli/resources/schema/guides.xsd"
+    input-format="rst"
+    >
+    <project
+        title="LiaHyphenator"
+        copyright="LOUIS Internet GmbH"
+    />
+    <extension
+        class="\T3Docs\Typo3DocsTheme\DependencyInjection\Typo3DocsThemeExtension"
+        edit-on-github="lia/lia_hyphenator"
+        edit-on-github-branch="main"
+        interlink-shortcode="lia/lia_hyphenator"
+        project-home="https://extensions.typo3.org/package/lia_hyphenator"
+        project-issues="https://github.com/LOUISINTERNET/lia_hyphenator/issues"
+        project-repository="https://github.com/LOUISINTERNET/lia_hyphenator"
+        typo3-core-preferred="stable"
+    />
+</guides>

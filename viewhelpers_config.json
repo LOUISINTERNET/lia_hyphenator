@@ -1,0 +1,6 @@
+{
+    "name": "LiaHyphenator",
+    "label": "LIA Hyphenator",
+    "namespaceAlias": "lih",
+    "targetNamespace": "http://typo3.org/ns/LIA/LiaHyphenator/ViewHelpers"
+}

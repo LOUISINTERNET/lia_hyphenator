@@ -13,6 +13,63 @@ use LIA\LiaHyphenator\Services\HyphenatorService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
+/**
+ * This ViewHelper can be used to apply hyphenation to text.
+ *
+ * Examples
+ * ========
+ *
+ * Usage with simple StringContent
+ * --------------------------------
+ *
+ * The ViewHelper can be used as tag as well as with inline syntax, here are some Examples
+ * used with a Variable set like this: 
+ * 
+ * ..  code-block:: html
+ *     <f:variable name="stringContent">Some textcontent to apply hyphention to</f:variable>
+ * 
+ * ViewHelper usage:
+ * 
+ * ..  code-block:: fluid
+ *     {stringContent -> lih:hyphenate()}
+ * 
+ * or
+ * 
+ * ..  code-block:: fluid
+ *     {lih:hyphenate(value: stringContent)}
+ * 
+ * or
+ * 
+ * ..  code-block:: html
+ *     <lih:hyphenate value="{stringContent}"></lih:hyphenate>
+ * 
+ * or
+ * 
+ * ..  code-block:: html
+ *     <lih:hyphenate>{stringContent}</lih:hyphenate>
+ *
+ * **The output** is the same for all examples:
+ * 
+ * .. code-block:: plaintext
+ *
+ *     Some text&shy;con&shy;tent to apply hy&shy;phen&shy;ti&shy;on to
+ *
+ * Example with arguments
+ * ----------------------
+ *
+ * ..  code-block:: html
+ *     <lih:hyphenate value="{stringContent}" leftMin="2" rightMin="3" wordMin="4" defaultLocale="de_CH"></lih:hyphenate>
+ * 
+ * This will use a german hyphenation dictionary with the settings for leftMin, rightMin and wordMin set as specified.
+ * 
+ * Inline example:
+ * 
+ * ..  code-block:: fluid
+ *     {stringContent -> lih:hyphenate(leftMin: 2, rightMin: 3, wordMin: 5)}
+ * 
+ * This will set the values for the arguments leftMin, rightMin and wordMin.
+ *
+ */
 final class HyphenateViewHelper extends AbstractViewHelper
 {
     /**
