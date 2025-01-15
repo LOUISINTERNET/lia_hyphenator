@@ -41,7 +41,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  * or
  * 
  * ..  code-block:: html
- *     <lih:hyphenate value="{stringContent}"></lih:hyphenate>
+ *     <lih:hyphenate value="{stringContent}" />
  * 
  * or
  * 

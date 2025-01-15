@@ -4,6 +4,7 @@
 /.buildpath
 /.vscode
 /.php_cs.cache
+/.php_cs-fixer.cache
 /.phpunit.cache
 /var/
 /vendor/
