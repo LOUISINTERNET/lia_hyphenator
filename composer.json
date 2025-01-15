@@ -40,7 +40,7 @@
 		],
 		"test:create-directories": "mkdir -p .Build/public/typo3temp/var/tests",
 		"test:functional": [
-			"@tests:create-directories",
+			"@test:create-directories",
 			"typo3DatabaseUsername=li-dev typo3DatabasePassword=meier typo3DatabaseName=typo3_test  find 'Tests/Functional' -wholename '*Test.php' -exec bash -c 'echo; echo \\\"Running functional test suite {} \\\"; .Build/bin/phpunit -c Build/phpunit/FunctionalTests.xml {}' \\;"
 		],
 		"test:unit": [
