@@ -5,7 +5,7 @@
 Configuration
 =============
 
-After installation you can use the lih:hyphenate ViewHelper in your templates by imporitng the namespace. 
+After installation you can use the `lih:hyphenate` ViewHelper in your templates by imporitng the namespace. 
 
 ..  tabs::
     ..  group-tab:: Tagbased Syntax
