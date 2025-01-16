@@ -1,7 +1,3 @@
-\|
-`Help & Support <https://louis.info/>`__ \|
-`Settings <Documentation/Settings.cfg>`__ \|
-
 
 # TYPO3 extension ``lia_hyphenator``
 

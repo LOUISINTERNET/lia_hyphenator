@@ -60,7 +60,11 @@
 		"build-full-doc": [
 			"@viewhelper-docs",
 			"@build-docs"
-		]
+		],
+		"prepare-release": [
+                    "sed -i'' -e \"s/'version' => ''/'version' => '$(echo ${GITHUB_REF#refs/tags/} | sed 's/v//')'/\" ext_emconf.php",
+                    "rm -r .github .gitignore .editorconfig .php-cs-fixer.dist.php .Build Build Tests"
+                ]
 	},
 	"extra": {
 		"typo3/cms": {
