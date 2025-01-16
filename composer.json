@@ -4,7 +4,7 @@
 	"description": "Wrapper for Word-Hyphenation for PHP based on the TeX-Hyphenation algorithm",
 	"authors": [
 		{
-			"name": "LOUIS Typo3 Developers",
+			"name": "LOUIS TYPO3 Developers",
 			"email": "info@dev.louis.info",
 			"homepage": "https://www.louis.info",
 			"role": "Developer"
@@ -41,7 +41,7 @@
 		"test:create-directories": "mkdir -p .Build/public/typo3temp/var/tests",
 		"test:functional": [
 			"@test:create-directories",
-			"typo3DatabaseUsername=li-dev typo3DatabasePassword=meier typo3DatabaseName=typo3_test  find 'Tests/Functional' -wholename '*Test.php' -exec bash -c 'echo; echo \\\"Running functional test suite {} \\\"; .Build/bin/phpunit -c Build/phpunit/FunctionalTests.xml {}' \\;"
+			"typo3DatabaseUsername= typo3DatabasePassword= typo3DatabaseName=typo3_test  find 'Tests/Functional' -wholename '*Test.php' -exec bash -c 'echo; echo \\\"Running functional test suite {} \\\"; .Build/bin/phpunit -c Build/phpunit/FunctionalTests.xml {}' \\;"
 		],
 		"test:unit": [
 			"[ -e .Build/bin/phpunit ] || composer update --ansi",
