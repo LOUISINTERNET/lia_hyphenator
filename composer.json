@@ -10,6 +10,12 @@
 			"role": "Developer"
 		}
 	],
+	"support": {
+		"email": "info@dev.louis.info",
+		"source": "https://github.com/LOUISINTERNET/lia_hyphenator",
+		"docs": "https://docs.typo3.org/p/lia/lia_hyphenator/main/en-us/",
+		"issues": "https://github.com/LOUISINTERNET/lia_hyphenator/issues"
+	},
 	"license": "GPL-2.0-or-later",
 	"require": {
 		"typo3/cms-core": "^12.4",

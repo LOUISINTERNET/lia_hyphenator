@@ -9,7 +9,7 @@
 |-------------------|-----------------------------------------------------------|
 | **Repository:**   | https://github.com/LOUISINTERNET/lia_hyphenator           |
 | **TER:**          | https://extensions.typo3.org/extension/lia_hyphenator/    |
-| **Documentation** | https://docs.typo3.org/p/lia/lia_hyphenator/master/en-us/ |
+| **Documentation** | https://docs.typo3.org/p/lia/lia_hyphenator/main/en-us/.  |
 | **Issues:**       | https://github.com/LOUISINTERNET/lia_hyphenator/issues    |
 
 
