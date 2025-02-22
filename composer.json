@@ -1,7 +1,7 @@
 {
 	"name": "lia/lia_hyphenator",
 	"type": "typo3-cms-extension",
-	"description": "Wrapper for Word-Hyphenation for PHP based on the TeX-Hyphenation algorithm",
+	"description": "TYPO3 extension wrapping PHP word hyphenation using the TeX hyphenation algorithm for accurate text formatting.",
 	"authors": [
 		{
 			"name": "LOUIS TYPO3 Developers",
