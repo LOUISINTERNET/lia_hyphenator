@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /*
 * This file is part of the "lia_hyphenator" Extension for TYPO3 CMS.
@@ -60,6 +60,7 @@ class HyphenatorService implements \TYPO3\CMS\Core\SingletonInterface
             ->setFilters(['Simple', 'CustomMarkup'])
             ->setTokenizers(['Whitespace', 'Punctuation']);
 
+        // @extensionScannerIgnoreLine
         $this->hyphenator->setOptions($this->options);
 
         return $this->hyphenator;
