@@ -14,7 +14,6 @@ use Org\Heigl\Hyphenator\Options;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\ServerRequest;
-use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 
 class HyphenatorService implements \TYPO3\CMS\Core\SingletonInterface
 {
@@ -43,15 +42,15 @@ class HyphenatorService implements \TYPO3\CMS\Core\SingletonInterface
      * - leftMin: The minimum number of characters that must be left unhyphenated on the left of the word. Defaults to 2.
      * - wordMin: The minimum length of words that can be hyphenated. Defaults to 6.
      * - quality: The quality of the hyphenation. Can be an integer from 0 (no hyphenation) to 9 (best quality). Defaults to 9.
+     * - hyphen: The string to use (e.g. '&shy;', "\u{00AD}", '-')
      *
      * @param array $options The options for the hyphenator.
      * @return Hyphenator The hyphenator instance.
      */
     public function getHyphenator(array $options): Hyphenator
     {
-        // TODO - Should we make this configurable?
-        // Possible alternative to &shy; may be \u00AD
-        $this->options->setHyphen('&shy;')
+        $this->options
+            ->setHyphen($this->getHyphenCharacter($options))
             ->setDefaultLocale($this->getLocale() ?? $this->getOptionValue('defaultLocale', $options, 'de-DE'))
             ->setRightMin($this->getOptionValue('rightMin', $options, 2))
             ->setLeftMin($this->getOptionValue('leftMin', $options, 2))
@@ -64,6 +63,22 @@ class HyphenatorService implements \TYPO3\CMS\Core\SingletonInterface
         $this->hyphenator->setOptions($this->options);
 
         return $this->hyphenator;
+    }
+
+    protected function getHyphenCharacter(array $options): string
+    {
+        $char = $this->getOptionValue('hyphen', $options, '-');
+
+        // The problem is that values from the settings (constant-editor) may not be correctly escaped 
+        // as a result, we receive the string here and not the charcode. We try to correct this
+        if (preg_match('@\\\\x([0-9a-fA-F]{2})@', $char, $matches)) {
+            $char = html_entity_decode('&#x' . $matches[1] . ';', ENT_QUOTES, 'UTF-8');
+        }
+        if (preg_match('@\\\\u\{?([0-9a-fA-F]{4})\}?@', $char, $matches)) {
+            $char = html_entity_decode('&#x' . $matches[1] . ';', ENT_QUOTES, 'UTF-8');
+        }
+
+        return $char;
     }
 
     /**

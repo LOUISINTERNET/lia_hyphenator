@@ -1,3 +1,5 @@
+# cat=Configuration//a; type=int+; label=hyphen:The string to use as hyphen (e.g. &shy; / &#xAD; / \u{00AD}).
+hyphen=&#xAD;
 # cat=Configuration//a; type=int+; label=leftMin:How many characters have to be left unhyphenated to the left of the word. This has to be an integer value.
 leftMin = 2
 # cat=Configuration//b; type=int+; label=rightMin:How many characters have to be left unhyphenated to the right of the word. This has to be an integer value

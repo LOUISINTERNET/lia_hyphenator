@@ -72,12 +72,15 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 final class HyphenateViewHelper extends AbstractViewHelper
 {
+    protected $escapeOutput = false;
+
     /**
      * Initialize all the needed arguments.
      */
     public function initializeArguments(): void
     {
         $this->registerArgument('value', 'string', 'Text to apply hyphenation to.', false);
+        $this->registerArgument('hyphen', 'string', 'String to use as hyphen (e.g. &shy; / "\xAD" / "\u{00AD}").', false);
         $this->registerArgument('leftMin', 'int', 'How many characters have to be left unhyphenated to the left of the word. This has to be an integer value.');
         $this->registerArgument('rightMin', 'int', 'How many characters have to be left unhyphenated to the right of the word. This has to be an integer value');
         $this->registerArgument('wordMin', 'int', 'Words under the given length will not be hyphenated altogether. It makes sense to set option to a higher value than the sum of rightMin and leftMin.');
@@ -106,12 +109,12 @@ final class HyphenateViewHelper extends AbstractViewHelper
         $hyphenatorService = GeneralUtility::makeInstance(HyphenatorService::class);
         $hyphenator = $hyphenatorService->getHyphenator($this->arguments);
         $value = $hyphenator->hyphenate($value);
+        $return = is_array($value) ? reset($value) : $value;
 
-        if (is_array($value)) {
-            return reset($value);
-        }
+        $hyphenChar = $hyphenator->getOptions()->getHyphen();
+        $return = preg_replace('@('.preg_quote($hyphenChar).'){2,}@usi', $hyphenChar, $return) ?? $return;
 
-        return $value;
+        return $return;
     }
 
     /**
