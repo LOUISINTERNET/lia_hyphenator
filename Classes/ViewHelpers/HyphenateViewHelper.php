@@ -99,7 +99,11 @@ final class HyphenateViewHelper extends AbstractViewHelper
     {
         $value = $this->renderChildren();
 
-        if ($value === null || !is_string($value)) {
+        if ($value === null || $value === '') {
+            return '';
+        }
+
+        if (!is_string($value)) {
             throw new \Exception(
                 'HyphenViewHelper: Incompatible or missing content.',
                 1733408400,
