@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /*
 * This file is part of the "lia_hyphenator" Extension for TYPO3 CMS.
@@ -47,7 +47,7 @@ class HyphenatorServiceTest extends UnitTestCase
     {
         $className = 'TestHyphenatorServiceProxy';
         if (!class_exists($className, false)) {
-            eval ('use LIA\LiaHyphenator\Services\HyphenatorService;' .
+            eval('use LIA\LiaHyphenator\Services\HyphenatorService;' .
                 'class ' . $className . ' extends HyphenatorService {' .
                 '  public function getOptionValue(string $key, array $options, $default = null): mixed {' .
                 '    return parent::getOptionValue($key, $options, $default);' .

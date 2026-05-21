@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /*
 * This file is part of the "lia_hyphenator" Extension for TYPO3 CMS.
@@ -23,33 +23,33 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  * --------------------------------
  *
  * The ViewHelper can be used as tag as well as with inline syntax, here are some Examples
- * used with a Variable set like this: 
- * 
+ * used with a Variable set like this:
+ *
  * ..  code-block:: html
  *     <f:variable name="stringContent">Some textcontent to apply hyphention to</f:variable>
- * 
+ *
  * ViewHelper usage:
- * 
+ *
  * ..  code-block:: fluid
  *     {stringContent -> lih:hyphenate()}
- * 
+ *
  * or
- * 
+ *
  * ..  code-block:: fluid
  *     {lih:hyphenate(value: stringContent)}
- * 
+ *
  * or
- * 
+ *
  * ..  code-block:: html
  *     <lih:hyphenate value="{stringContent}" />
- * 
+ *
  * or
- * 
+ *
  * ..  code-block:: html
  *     <lih:hyphenate>{stringContent}</lih:hyphenate>
  *
  * **The output** is the same for all examples:
- * 
+ *
  * .. code-block:: plaintext
  *
  *     Some text&shy;con&shy;tent to apply hy&shy;phen&shy;ti&shy;on to
@@ -59,16 +59,15 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  *
  * ..  code-block:: html
  *     <lih:hyphenate value="{stringContent}" leftMin="2" rightMin="3" wordMin="4" defaultLocale="de_CH"></lih:hyphenate>
- * 
+ *
  * This will use a german hyphenation dictionary with the settings for leftMin, rightMin and wordMin set as specified.
- * 
+ *
  * Inline example:
- * 
+ *
  * ..  code-block:: fluid
  *     {stringContent -> lih:hyphenate(leftMin: 2, rightMin: 3, wordMin: 5)}
- * 
- * This will set the values for the arguments leftMin, rightMin and wordMin.
  *
+ * This will set the values for the arguments leftMin, rightMin and wordMin.
  */
 final class HyphenateViewHelper extends AbstractViewHelper
 {
@@ -116,7 +115,7 @@ final class HyphenateViewHelper extends AbstractViewHelper
         $return = is_array($value) ? reset($value) : $value;
 
         $hyphenChar = $hyphenator->getOptions()->getHyphen();
-        $return = preg_replace('@('.preg_quote($hyphenChar).'){2,}@usi', $hyphenChar, $return) ?? $return;
+        $return = preg_replace('@(' . preg_quote((string)$hyphenChar, '@') . '){2,}@usi', (string)$hyphenChar, (string)$return) ?? $return;
 
         return $return;
     }

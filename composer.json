@@ -18,12 +18,12 @@
 	},
 	"license": "GPL-2.0-or-later",
 	"require": {
-		"typo3/cms-core": "^12.4|^13.4",
+		"typo3/cms-core": "^12.4 || ^13.4 || ^14.3",
 		"org_heigl/hyphenator": "^3.1.0"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "^10.5",
-		"typo3/testing-framework": "^8.0.9",
+		"phpunit/phpunit": "^10.5 || ^11.0",
+		"typo3/testing-framework": "^8.0.9 || ^9.0",
 		"typo3/coding-standards": "^0.8.0",
 		"t3docs/fluid-documentation-generator": "^4.4"
 	},

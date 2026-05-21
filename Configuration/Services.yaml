@@ -5,4 +5,9 @@ services:
     public: false
 
   LIA\LiaHyphenator\:
-     resource: '../Classes/*'
+    resource: '../Classes/*'
+
+  # Fetched via GeneralUtility::makeInstance() from the ViewHelper.
+  # Must be public for makeInstance() to resolve constructor dependencies.
+  LIA\LiaHyphenator\Services\HyphenatorService:
+    public: true
