@@ -20,7 +20,6 @@ use TYPO3Fluid\Fluid\View\TemplateView;
  */
 final class HyphenateViewHelperTest extends FunctionalTestCase
 {
-
     protected array $configurationToUseInTestInstance = [
         'EXTENSIONS' => [
             'lia_hyphenator' => [

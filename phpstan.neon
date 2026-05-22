@@ -1,0 +1,26 @@
+parameters:
+    typo3:
+        containerXmlPath: ../../var/cache/development/App_KernelDevelopmentDebugContainer.xml
+
+    level: 8
+
+    paths:
+        - Classes
+        - Configuration
+
+    excludePaths:
+        analyseAndScan:
+            - .Build (?)
+            - vendor (?)
+            - Tests
+
+    treatPhpDocTypesAsCertain: false
+
+    # org_heigl/hyphenator is the extension's own composer dependency. When the extension
+    # is installed via composer, it is resolved into .Build/vendor (vendor-dir override in
+    # composer.json). It is intentionally NOT loaded at the project root vendor, so static
+    # analysis from the project root cannot see those classes.
+    ignoreErrors:
+        -
+            message: '#Org\\Heigl\\Hyphenator\\#'
+            reportUnmatched: false

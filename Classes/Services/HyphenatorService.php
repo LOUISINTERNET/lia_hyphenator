@@ -14,11 +14,12 @@ use Org\Heigl\Hyphenator\Options;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Core\SingletonInterface;
 
-class HyphenatorService implements \TYPO3\CMS\Core\SingletonInterface
+class HyphenatorService implements SingletonInterface
 {
-    private Hyphenator $hyphenator;
-    private Options $options;
+    private readonly Hyphenator $hyphenator;
+    private readonly Options $options;
 
     /**
      * Constructs a new HyphenatorService.
@@ -44,7 +45,7 @@ class HyphenatorService implements \TYPO3\CMS\Core\SingletonInterface
      * - quality: The quality of the hyphenation. Can be an integer from 0 (no hyphenation) to 9 (best quality). Defaults to 9.
      * - hyphen: The string to use (e.g. '&shy;', "\u{00AD}", '-')
      *
-     * @param array $options The options for the hyphenator.
+     * @param array<string, mixed> $options The options for the hyphenator.
      * @return Hyphenator The hyphenator instance.
      */
     public function getHyphenator(array $options): Hyphenator
@@ -65,16 +66,19 @@ class HyphenatorService implements \TYPO3\CMS\Core\SingletonInterface
         return $this->hyphenator;
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     protected function getHyphenCharacter(array $options): string
     {
         $char = $this->getOptionValue('hyphen', $options, '-');
 
-        // The problem is that values from the settings (constant-editor) may not be correctly escaped 
+        // The problem is that values from the settings (constant-editor) may not be correctly escaped
         // as a result, we receive the string here and not the charcode. We try to correct this
-        if (preg_match('@\\\\x([0-9a-fA-F]{2})@', $char, $matches)) {
+        if (preg_match('@\\\\x([0-9a-fA-F]{2})@', (string)$char, $matches)) {
             $char = html_entity_decode('&#x' . $matches[1] . ';', ENT_QUOTES, 'UTF-8');
         }
-        if (preg_match('@\\\\u\{?([0-9a-fA-F]{4})\}?@', $char, $matches)) {
+        if (preg_match('@\\\\u\{?([0-9a-fA-F]{4})\}?@', (string)$char, $matches)) {
             $char = html_entity_decode('&#x' . $matches[1] . ';', ENT_QUOTES, 'UTF-8');
         }
 
@@ -90,7 +94,7 @@ class HyphenatorService implements \TYPO3\CMS\Core\SingletonInterface
      * is not found in either, it returns the provided default value.
      *
      * @param string $key The key for the option to retrieve.
-     * @param array $options An array of options to search for the key.
+     * @param array<string, mixed> $options An array of options to search for the key.
      * @param mixed $default The default value to return if the key is not found.
      *
      * @return mixed The value of the option if found, or the default value if not.
@@ -112,8 +116,8 @@ class HyphenatorService implements \TYPO3\CMS\Core\SingletonInterface
     private function getLocale(): ?string
     {
         $language =
-            $this->getRequest()?->getAttribute('language')
-            ?? $this->getRequest()?->getAttribute('site')?->getDefaultLanguage()
+            $this->getRequest()->getAttribute('language')
+            ?? $this->getRequest()->getAttribute('site')?->getDefaultLanguage()
             ?? null;
         if ($language === null) {
             return null;

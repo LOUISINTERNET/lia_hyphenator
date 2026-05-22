@@ -8,10 +8,10 @@ $EM_CONF[$_EXTKEY] = [
     'author_company' => 'LOUIS INTERNET',
     'author_email' => 'info@dev.louis.info',
     'state' => 'stable',
-    'version' => '1.1.1',
+    'version' => '1.2.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '12.4.0-13.4.99',
+            'typo3' => '12.4.0-14.3.99',
         ],
         'conflicts' => [],
         'suggests' => [],
